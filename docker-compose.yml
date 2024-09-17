@@ -1,0 +1,41 @@
+version: "3"
+services:
+  portainer:
+    image: portainer/portainer-ce
+    ports:
+      - 8000:8000
+      - 443:9443
+    volumes:
+      - portainer_data:/data
+      - /var/run/docker.sock:/var/run/docker.sock
+    networks:
+      - bdp2-net
+
+  jupyter:
+    image: elibonanni/bdp2_midterm_review
+    environment:
+      - JUPYTER_ENABLE_LAB=yes 
+      - JUPYTER_TOKEN=bdp2_password 
+      - CHOWN_HOME=yes 
+      - CHOWN_HOME_OPTS=-R
+    user: root
+    ports:
+      - 80:8888
+    volumes: 
+      - ~/review/bdp2_midterm_review/work:/home/jovyan
+    networks: 
+      - bdp2-net
+
+  redis:
+    image: redis
+    user: "1000"
+    volumes:
+      - ~/review:/data
+    networks: 
+      - bdp2-net
+networks: 
+  bdp2-net:
+
+volumes:
+  portainer_data:
+
