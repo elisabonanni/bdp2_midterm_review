@@ -212,7 +212,7 @@ services:
     image: elibonanni/bdp2_midterm_review
     environment:
       - JUPYTER_ENABLE_LAB=yes
-      - JUPYTER_TOKEN=${JUPYTER_PW}
+      - JUPYTER_TOKEN=bdp2_password
       - CHOWN_HOME=yes
       - CHOWN_HOME_OPTS=-R
     user: root
